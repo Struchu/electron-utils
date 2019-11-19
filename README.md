@@ -1,19 +1,12 @@
 # Electron runner for development
 
 This image provides development environment for the Electron
-applications. To give access to the Docker container to your X window
-server run:
-
-```bash
-$ xhost +
-```
-
-> `xhost` is available in `x11-xserver-utils` on Debian based systems.
+applications.
 
 To run your application run in folder containing your application:
 
 ```bash
-$ docker run --rm -it -v $(pwd):/app --network host -e DISPLAY=$DISPLAY docker.pkg.github.com/struchu/electron-runner/runner:0.1.0 npm run start:dev
+$ docker run --rm -it -v $(pwd):/app --network host -e DISPLAY=$DISPLAY -e "${HOME}/.Xauthority:/root/.Xauthority:rw" docker.pkg.github.com/struchu/electron-runner/runner:0.1.0 npm run start:dev
 ```
 
 > Note: please tweak the command that starts your app.
@@ -29,6 +22,7 @@ services:
             DISPLAY: "${DISPLAY}"
         volumes:
             - .:/app
+            - "${HOME}/.Xauthority:/root/.Xauthority:rw"
         command: ["npm", "run", "start:dev"]
 ```
 
