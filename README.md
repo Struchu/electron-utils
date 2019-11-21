@@ -1,28 +1,8 @@
-# Electron runner for development
+# Electron utils
 
-This image provides development environment for the Electron
-applications.
+This repository contains several utilities that allow user develop and
+package Electron applications. All these utilities are packaged as
+Docker containers. These utilities contain:
 
-To run your application run in folder containing your application:
-
-```bash
-$ docker run --rm -it -v $(pwd):/app --network host -e DISPLAY=$DISPLAY -e "${HOME}/.Xauthority:/root/.Xauthority:rw" docker.pkg.github.com/struchu/electron-runner/runner:0.1.0 npm run start:dev
-```
-
-> Note: please tweak the command that starts your app.
-
-Alternatively you can add service to your `docker-compose.yml` file:
-
-```yml
-services:
-    electron:
-        image: docker.pkg.github.com/struchu/electron-runner/runner:0.1.0
-        network_mode: "host"
-        environment:
-            DISPLAY: "${DISPLAY}"
-        volumes:
-            - .:/app
-            - "${HOME}/.Xauthority:/root/.Xauthority:rw"
-        command: ["npm", "run", "start:dev"]
-```
-
+* `runner` - Docker container that runs the Electron application within
+  Docker container in development mode.
